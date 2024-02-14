@@ -199,3 +199,25 @@ function isOnline() {
 window.addEventListener('online', isOnline)
 window.addEventListener('offline', isOnline)
 isOnline();
+
+
+// Notificaciones
+function notificarme() {
+    if (!window.Notification) {
+        console.log('Este navegador no soporta notificaciones')
+        return;
+    }
+
+    if (Notification.permission === 'granted') {
+        new Notification('Hola mundo! - granted');
+    } else if ( Notification.permission !== 'denied' || Notification.permission === 'default') {
+        Notification.requestPermission( function( permission) {
+            console.log( permission )
+            if ( permission === 'granted') {
+                new Notification('Hola mundo! - pregunta');        
+            }
+        })
+    }
+}
+
+notificarme();
